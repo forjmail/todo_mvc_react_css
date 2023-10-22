@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react';
 import { ContextType, Todo } from '../../types';
 import { Context } from '../../context/Context';
-import styles1 from './one-todo.module.css';
-import styles2 from '../List/list.module.css';
+import styles from './one-todo.module.css';
 
 export default function OneTodo({ todo }: { todo: Todo }) {
   const { editedId, setEditedId, updateTodo, removeTodo } =
@@ -49,10 +48,14 @@ export default function OneTodo({ todo }: { todo: Todo }) {
   }
 
   return (
-    <>
-      <div className={styles2.view}>
+    <span
+      className={`todo ${todo.completed ? styles.completed : ''} ${
+        todo.id === editedId ? styles.editing : ''
+      }`}
+    >
+      <div className={styles.view}>
         <input
-          className={styles1.toggle}
+          className={styles.toggle}
           type="checkbox"
           checked={todo.completed}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -61,13 +64,13 @@ export default function OneTodo({ todo }: { todo: Todo }) {
         />
         <label onDoubleClick={() => editTodo(todo)}>{todo.title}</label>
         <button
-          className={styles1.destroy}
+          className={styles.destroy}
           onClick={() => removeTodo(todo.id)}
         ></button>
       </div>
       {beforeEditCache && (
         <input
-          className={styles2.edit}
+          className={styles.edit}
           type="text"
           autoFocus
           value={todo.title}
@@ -78,6 +81,6 @@ export default function OneTodo({ todo }: { todo: Todo }) {
           onKeyUp={(e: React.KeyboardEvent<HTMLElement>) => keyHandler(e)}
         />
       )}
-    </>
+    </span>
   );
 }

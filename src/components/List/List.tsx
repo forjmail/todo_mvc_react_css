@@ -5,8 +5,7 @@ import OneTodo from '../OneTodo/OneTodo';
 import styles from './list.module.css';
 
 export default function List() {
-  const { todos, editedId, toggleAll, filter } =
-    useContext<ContextType>(Context);
+  const { todos, toggleAll, filter } = useContext<ContextType>(Context);
   const [filteredTodo, setFilteredTodo] = useState(todos);
 
   useEffect(() => {
@@ -37,12 +36,7 @@ export default function List() {
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className={styles.todo_list}>
         {filteredTodo.map((todo: Todo) => (
-          <li
-            className={`todo ${todo.completed ? styles.completed : ''} ${
-              todo.id === editedId ? styles.editing : ''
-            }`}
-            key={todo.id}
-          >
+          <li key={todo.id}>
             <OneTodo todo={todo} />
           </li>
         ))}
