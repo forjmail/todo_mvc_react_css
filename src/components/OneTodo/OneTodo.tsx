@@ -12,10 +12,8 @@ export default function OneTodo({ todo }: { todo: Todo }) {
   function keyHandler(event: React.KeyboardEvent<HTMLElement>) {
     if (event.key === 'Enter' || event.keyCode === 13) {
       doneEdit(todo);
-      console.log('edit done');
     } else if (event.key === 'Escape' || event.keyCode === 27) {
       cancelEdit(todo);
-      console.log('edit cancel');
     }
   }
 
